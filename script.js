@@ -442,6 +442,9 @@ function calculateResults() {
 
 // 結果を表示する関数
 function displayResults(averageScores) {
+    // プログレスバーを非表示にする
+    document.getElementById('progress-container').classList.add('hidden');
+    
     document.getElementById('quiz').style.display = 'none';
     const resultSection = document.getElementById('result');
     resultSection.style.display = 'block';
@@ -472,13 +475,13 @@ function displayResults(averageScores) {
 
     // デカゴン（10角形）で結果を表示
     const decagonContainer = document.createElement('div');
-    decagonContainer.classList.add('result-hexagon'); // クラス名はそのまま使用
+    decagonContainer.classList.add('result-decahedron'); // クラス名を修正
 
     // SVGを使用して10角形を作成
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
-    svg.setAttribute("width", "300");
-    svg.setAttribute("height", "300");
+    svg.setAttribute("width", "500");
+    svg.setAttribute("height", "500");
     svg.setAttribute("viewBox", "0 0 100 100");
 
     const polygon = document.createElementNS(svgNS, "polygon");
@@ -496,33 +499,34 @@ function displayResults(averageScores) {
     svg.appendChild(polygon);
 
     // 各カテゴリの位置にテキストを追加
-    for(let i=0; i<10; i++) {
+    const categories = Object.keys(averageScores);
+    categories.forEach((param, i) => {
         const label = document.createElementNS(svgNS, "text");
         const x = 50 + 45 * Math.cos((angle * i - 90) * Math.PI / 180);
         const y = 50 + 45 * Math.sin((angle * i - 90) * Math.PI / 180);
         label.setAttribute("x", x);
         label.setAttribute("y", y);
         label.setAttribute("text-anchor", "middle");
-        label.setAttribute("font-size", "4");
+        label.setAttribute("font-size", "3");
+        label.setAttribute("font-family", "'Arial', sans-serif"); // フォントファミリーを明示
         label.classList.add("category-label");
-        label.textContent = Object.keys(averageScores)[i];
+        label.textContent = param;
         svg.appendChild(label);
-    }
+    });
 
     // 各カテゴリのスコアを表示
-    for(let i=0; i<10; i++) {
-        const param = Object.keys(averageScores)[i];
+    categories.forEach((param, i) => {
         const score = averageScores[param];
         const scoreX = 50 + (score * 8) * Math.cos((angle * i - 90) * Math.PI / 180);
         const scoreY = 50 + (score * 8) * Math.sin((angle * i - 90) * Math.PI / 180);
 
-        const scoreText = document.createElementNS(svgNS, "circle");
-        scoreText.setAttribute("cx", scoreX);
-        scoreText.setAttribute("cy", scoreY);
-        scoreText.setAttribute("r", "2");
-        scoreText.setAttribute("fill", "#00796b");
-        svg.appendChild(scoreText);
-    }
+        const scoreCircle = document.createElementNS(svgNS, "circle");
+        scoreCircle.setAttribute("cx", scoreX);
+        scoreCircle.setAttribute("cy", scoreY);
+        scoreCircle.setAttribute("r", "2");
+        scoreCircle.classList.add("score-circle");
+        svg.appendChild(scoreCircle);
+    });
 
     decagonContainer.appendChild(svg);
     overallDiv.appendChild(decagonContainer);
