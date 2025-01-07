@@ -21,6 +21,7 @@ h1 {
 
 main {
     padding: 20px;
+    padding-bottom: 60px; /* フッターの高さに合わせて調整 */
 }
 
 button {
@@ -31,11 +32,13 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; /* ボタンと質問の間に余白を追加 */
 }
 
 button:hover {
     background-color: #ff85c1;
+    transform: scale(1.05); /* ホバー時に少し拡大 */
 }
 
 footer {
@@ -45,6 +48,7 @@ footer {
     width: 100%;
     bottom: 0;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* フッターが他の要素より前面に表示される */
 }
 
 .question {

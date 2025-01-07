@@ -389,7 +389,7 @@ function displayResults(averageScores) {
         paramScore.textContent = `スコア: ${averageScores[param]}`;
         paramDiv.appendChild(paramScore);
 
-        // スコアの意味を追加
+        // スコアの意味と追加情報を追加
         const scoreDesc = document.createElement('p');
         const score = parseFloat(averageScores[param]);
         if (score >= 4.0) {
