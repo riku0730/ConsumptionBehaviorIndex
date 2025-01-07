@@ -11,10 +11,12 @@ header {
     background-color: #ff69b4;
     color: white;
     padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     margin: 0;
+    font-size: 2em;
 }
 
 main {
@@ -29,6 +31,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -41,6 +44,7 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .question {
@@ -49,6 +53,11 @@ footer {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.question:hover {
+    transform: scale(1.02);
 }
 
 .question p {
@@ -66,6 +75,7 @@ footer {
     padding: 10px;
     background-color: #e0f7fa;
     border-radius: 8px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .result-parameter h3 {
@@ -83,6 +93,7 @@ footer {
     background-color: #fff3e0;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-in-out;
 }
 
 .overall-result h2 {
@@ -93,6 +104,12 @@ footer {
 .overall-result p {
     font-size: 20px;
     font-weight: bold;
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* レスポンシブデザイン */

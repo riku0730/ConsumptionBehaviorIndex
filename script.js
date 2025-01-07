@@ -395,15 +395,59 @@ function displayResults(averageScores) {
         if (score >= 4.0) {
             scoreDesc.textContent = "高い意識";
             scoreDesc.style.color = "#4CAF50"; // 緑
+            // 高スコアの特徴を追加
+            const feature = document.createElement('p');
+            feature.textContent = getHighScoreFeature(param);
+            feature.style.color = "#388E3C";
+            paramDiv.appendChild(feature);
         } else if (score >= 3.0) {
             scoreDesc.textContent = "中程度の意識";
             scoreDesc.style.color = "#FFC107"; // 黄色
         } else {
             scoreDesc.textContent = "低い意識";
             scoreDesc.style.color = "#F44336"; // 赤
+            // 低スコアの改善提案を追加
+            const suggestion = document.createElement('p');
+            suggestion.textContent = getLowScoreSuggestion(param);
+            suggestion.style.color = "#D32F2F";
+            paramDiv.appendChild(suggestion);
         }
         paramDiv.appendChild(scoreDesc);
 
         resultSection.appendChild(paramDiv);
     }
+}
+
+// 高スコアの特徴を返す関数（各パラメーターごとにカスタマイズ）
+function getHighScoreFeature(param) {
+    const features = {
+        "Cost-Performance Index": "コスパに優れた消費者タイプ！お得な買い物を楽しんでいます。",
+        "Future Design Index": "未来を見据えた計画的な消費者タイプ！将来のために賢くお金を使っています。",
+        "Empathy Spending Index": "思いやりのある消費者タイプ！周囲の人を大切にするためにお金を使います。",
+        "Self-Growth Challenge Index": "自己成長を重視する消費者タイプ！常にスキルや知識を磨いています。",
+        "Eco & Social Contribution Index": "エコ意識が高い消費者タイプ！環境や社会に配慮した選択をしています。",
+        "Joy & Relaxation Index": "楽しみと癒しを大切にする消費者タイプ！日常に彩りを加えています。",
+        "Security & Preparedness Index": "安心と備えを重視する消費者タイプ！リスクに備えて賢くお金を使います。",
+        "Everyday Artfulness Index": "アートを愛する消費者タイプ！美しいデザインや個性的な商品を選びます。",
+        "Practicality Focus Index": "実用性を重視する消費者タイプ！必要なものを効率的に選んでいます。",
+        "Brand Values Index": "ブランド価値を重視する消費者タイプ！信頼できるブランドを選んでいます。"
+    };
+    return features[param] || "";
+}
+
+// 低スコアの改善提案を返す関数（各パラメーターごとにカスタマイズ）
+function getLowScoreSuggestion(param) {
+    const suggestions = {
+        "Cost-Performance Index": "コスパを意識してみましょう。価格と品質のバランスを考えて買い物をすると良いですよ。",
+        "Future Design Index": "将来の計画を立てることをお勧めします。貯金や投資を始めてみましょう。",
+        "Empathy Spending Index": "周囲の人への思いやりを持つことも大切です。ギフト選びや寄付などを検討してみてください。",
+        "Self-Growth Challenge Index": "自己成長にもっと力を入れてみましょう。新しいスキルや知識を習得するための時間を作ってみてください。",
+        "Eco & Social Contribution Index": "環境や社会に配慮した消費を心がけてみましょう。リサイクルやフェアトレード商品を選ぶと良いですよ。",
+        "Joy & Relaxation Index": "日常の楽しみを増やしてみましょう。趣味やレジャーに少しずつ時間を使ってみてください。",
+        "Security & Preparedness Index": "リスクに備えるための準備を始めましょう。保険や緊急備蓄を検討してみてください。",
+        "Everyday Artfulness Index": "デザインやアートにもっと興味を持ってみましょう。美しいものに触れることで生活が豊かになります。",
+        "Practicality Focus Index": "実用性を意識してみましょう。必要なものを優先的に選ぶことで、生活がスムーズになります。",
+        "Brand Values Index": "信頼できるブランドを探してみましょう。ブランドの背景や価値観を調べて選ぶと良いですよ。"
+    };
+    return suggestions[param] || "";
 }
