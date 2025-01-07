@@ -196,6 +196,12 @@ footer {
     fill: #00796b;
 }
 
+.result-decahedron .score-polygon {
+    fill: rgba(0, 121, 107, 0.5); /* 半透明の色 */
+    stroke: #00796b;
+    stroke-width: 1;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 1200px) {
     .result-decahedron {

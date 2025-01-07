@@ -484,19 +484,20 @@ function displayResults(averageScores) {
     svg.setAttribute("height", "500");
     svg.setAttribute("viewBox", "0 0 100 100");
 
-    const polygon = document.createElementNS(svgNS, "polygon");
+    // 外枠のデカゴン
+    const outerPolygon = document.createElementNS(svgNS, "polygon");
     const angle = 36; // 360 / 10 = 36 degrees per vertex
-    let points = "";
+    let outerPoints = "";
     for(let i=0; i<10; i++) {
         const x = 50 + 40 * Math.cos((angle * i - 90) * Math.PI / 180);
         const y = 50 + 40 * Math.sin((angle * i - 90) * Math.PI / 180);
-        points += `${x},${y} `;
+        outerPoints += `${x},${y} `;
     }
-    polygon.setAttribute("points", points.trim());
-    polygon.setAttribute("fill", "#ffeb3b");
-    polygon.setAttribute("stroke", "#333");
-    polygon.setAttribute("stroke-width", "1");
-    svg.appendChild(polygon);
+    outerPolygon.setAttribute("points", outerPoints.trim());
+    outerPolygon.setAttribute("fill", "#ffeb3b");
+    outerPolygon.setAttribute("stroke", "#333");
+    outerPolygon.setAttribute("stroke-width", "1");
+    svg.appendChild(outerPolygon);
 
     // 各カテゴリの位置にテキストを追加
     const categories = Object.keys(averageScores);
@@ -514,11 +515,32 @@ function displayResults(averageScores) {
         svg.appendChild(label);
     });
 
-    // 各カテゴリのスコアを表示
+    // ユーザーのスコアをプロットする
+    const scorePoints = [];
     categories.forEach((param, i) => {
         const score = averageScores[param];
-        const scoreX = 50 + (score * 8) * Math.cos((angle * i - 90) * Math.PI / 180);
-        const scoreY = 50 + (score * 8) * Math.sin((angle * i - 90) * Math.PI / 180);
+        // スコア1〜5をスケールして半径を決定（1〜5を8〜40にスケーリング）
+        const scaledScore = (score / 5) * 40; // 最大40
+        const scoreX = 50 + scaledScore * Math.cos((angle * i - 90) * Math.PI / 180);
+        const scoreY = 50 + scaledScore * Math.sin((angle * i - 90) * Math.PI / 180);
+        scorePoints.push(`${scoreX},${scoreY}`);
+    });
+
+    // 内枠のデカゴン（スコアを結んだ多角形）
+    const innerPolygon = document.createElementNS(svgNS, "polygon");
+    innerPolygon.setAttribute("points", scorePoints.join(' '));
+    innerPolygon.setAttribute("fill", "rgba(0, 121, 107, 0.5)"); // 半透明
+    innerPolygon.setAttribute("stroke", "#00796b");
+    innerPolygon.setAttribute("stroke-width", "1");
+    innerPolygon.classList.add("score-polygon");
+    svg.appendChild(innerPolygon);
+
+    // 各スコアポイントに円を描画
+    categories.forEach((param, i) => {
+        const score = averageScores[param];
+        const scaledScore = (score / 5) * 40;
+        const scoreX = 50 + scaledScore * Math.cos((angle * i - 90) * Math.PI / 180);
+        const scoreY = 50 + scaledScore * Math.sin((angle * i - 90) * Math.PI / 180);
 
         const scoreCircle = document.createElementNS(svgNS, "circle");
         scoreCircle.setAttribute("cx", scoreX);
