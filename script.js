@@ -1,9 +1,11 @@
 document.getElementById('start-button').addEventListener('click', () => {
     document.getElementById('introduction').style.display = 'none';
     document.getElementById('quiz').style.display = 'block';
+    document.getElementById('progress-container').classList.remove('hidden');
     loadQuestions();
 });
 
+// 質問データ
 const questions = [
     // **1. コスパ指数（Cost-Performance Index）**
     { 
@@ -267,14 +269,30 @@ const questions = [
     },
 ];
 
+// ページごとの質問数
+const questionsPerPage = 10;
+const totalPages = Math.ceil(questions.length / questionsPerPage);
+let currentPage = 1;
+
+// ユーザーの回答を保存するオブジェクト
+let userAnswers = {};
+
+// ロードされた質問を表示
 function loadQuestions() {
     const quizSection = document.getElementById('quiz');
-    questions.forEach(q => {
+    const questionsContainer = document.getElementById('questions-container');
+    questionsContainer.innerHTML = ''; // 既存の質問をクリア
+
+    const start = (currentPage - 1) * questionsPerPage;
+    const end = start + questionsPerPage;
+    const currentQuestions = questions.slice(start, end);
+
+    currentQuestions.forEach(q => {
         const questionDiv = document.createElement('div');
-        questionDiv.classList.add('question');
+        questionDiv.classList.add('question', 'fade-in');
 
         const questionText = document.createElement('p');
-        questionText.textContent = q.text;
+        questionText.textContent = `${q.id}. ${q.text}`;
         questionDiv.appendChild(questionText);
 
         // ラジオボタンの作成
@@ -285,19 +303,88 @@ function loadQuestions() {
             input.type = 'radio';
             input.name = `question-${q.id}`;
             input.value = i;
+
+            // 既に回答がある場合はチェックを付ける
+            if(userAnswers[`question-${q.id}`] === i) {
+                input.checked = true;
+            }
+
             label.prepend(input);
             questionDiv.appendChild(label);
         }
 
-        quizSection.appendChild(questionDiv);
+        questionsContainer.appendChild(questionDiv);
     });
 
-    const submitButton = document.createElement('button');
-    submitButton.textContent = "結果を見る";
-    submitButton.addEventListener('click', calculateResults);
-    quizSection.appendChild(submitButton);
+    // プログレスバーを更新
+    updateProgressBar();
+
+    // ナビゲーションボタンの表示/非表示を調整
+    document.getElementById('prev-button').style.display = currentPage === 1 ? 'none' : 'inline-block';
+    document.getElementById('next-button').style.display = currentPage === totalPages ? 'none' : 'inline-block';
+    document.getElementById('submit-button').style.display = currentPage === totalPages ? 'inline-block' : 'none';
 }
 
+// プログレスバーを更新
+function updateProgressBar(isComplete = false) {
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const progressPercent = isComplete ? 100 : ((currentPage) / totalPages) * 100;
+    progressBar.style.width = `${progressPercent}%`;
+    progressText.textContent = `${progressPercent}%`;
+}
+
+// 次へボタンのイベントリスナー
+document.getElementById('next-button').addEventListener('click', () => {
+    if(saveAnswers()) {
+        currentPage++;
+        loadQuestions();
+        window.scrollTo(0, 0); // ページトップにスクロール
+    }
+});
+
+// 前へボタンのイベントリスナー
+document.getElementById('prev-button').addEventListener('click', () => {
+    currentPage--;
+    loadQuestions();
+    window.scrollTo(0, 0); // ページトップにスクロール
+});
+
+// 結果を見るボタンのイベントリスナー
+document.getElementById('submit-button').addEventListener('click', () => {
+    if(saveAnswers()) {
+        calculateResults();
+    }
+});
+
+// ユーザーの回答を保存する関数
+function saveAnswers() {
+    const currentQuestions = questions.slice((currentPage -1) * questionsPerPage, currentPage * questionsPerPage);
+    let allAnswered = true;
+
+    currentQuestions.forEach(q => {
+        const radios = document.getElementsByName(`question-${q.id}`);
+        let answered = false;
+        radios.forEach(radio => {
+            if (radio.checked) {
+                userAnswers[`question-${q.id}`] = parseInt(radio.value);
+                answered = true;
+            }
+        });
+        if (!answered) {
+            allAnswered = false;
+        }
+    });
+
+    if (!allAnswered) {
+        alert("全ての質問に回答してください！");
+        return false;
+    }
+
+    return true;
+}
+
+// 診断結果を計算する関数
 function calculateResults() {
     const scores = {
         "Cost-Performance Index": [],
@@ -315,15 +402,10 @@ function calculateResults() {
     let allAnswered = true;
 
     questions.forEach(q => {
-        const radios = document.getElementsByName(`question-${q.id}`);
-        let answered = false;
-        radios.forEach(radio => {
-            if (radio.checked) {
-                scores[q.parameter].push(parseInt(radio.value));
-                answered = true;
-            }
-        });
-        if (!answered) {
+        const answer = userAnswers[`question-${q.id}`];
+        if (answer !== undefined) {
+            scores[q.parameter].push(answer);
+        } else {
             allAnswered = false;
         }
     });
@@ -344,6 +426,7 @@ function calculateResults() {
     displayResults(averageScores);
 }
 
+// 結果を表示する関数
 function displayResults(averageScores) {
     document.getElementById('quiz').style.display = 'none';
     const resultSection = document.getElementById('result');
@@ -354,17 +437,16 @@ function displayResults(averageScores) {
 
     // 全体的な評価
     const highParams = Object.keys(averageScores).filter(param => averageScores[param] >= 4.0);
-    let overallType = "多面的な消費者タイプ！";
-    if (highParams.length === 0) {
-        overallType = "バランスの取れた消費者タイプ！";
-    } else if (highParams.length === 1) {
+    let overallType = "バランスの取れた消費者タイプ！";
+
+    if (highParams.length === 1) {
         overallType = `${highParams[0]}を重視する消費者タイプ！`;
-    } else {
+    } else if (highParams.length > 1) {
         overallType = `${highParams.join('、')}を重視する消費者タイプ！`;
     }
 
     const overallDiv = document.createElement('div');
-    overallDiv.classList.add('overall-result');
+    overallDiv.classList.add('overall-result', 'fade-in');
 
     const overallTitle = document.createElement('h2');
     overallTitle.textContent = "あなたの消費行動タイプ";
@@ -374,12 +456,50 @@ function displayResults(averageScores) {
     overallDesc.textContent = overallType;
     overallDiv.appendChild(overallDesc);
 
+    // 10角形（SVG）で結果を表示
+    const hexagonContainer = document.createElement('div');
+    hexagonContainer.classList.add('result-hexagon');
+
+    // SVGを使用して10角形を作成
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("width", "200");
+    svg.setAttribute("height", "200");
+    svg.setAttribute("viewBox", "0 0 100 100");
+
+    const polygon = document.createElementNS(svgNS, "polygon");
+    const angle = 36; // 360 / 10 = 36 degrees per vertex
+    let points = "";
+    for(let i=0; i<10; i++) {
+        const x = 50 + 40 * Math.cos((angle * i - 90) * Math.PI / 180);
+        const y = 50 + 40 * Math.sin((angle * i - 90) * Math.PI / 180);
+        points += `${x},${y} `;
+    }
+    polygon.setAttribute("points", points.trim());
+    polygon.setAttribute("fill", "#ffeb3b");
+    polygon.setAttribute("stroke", "#333");
+    polygon.setAttribute("stroke-width", "1");
+    svg.appendChild(polygon);
+
+    // 中央にテキストを追加
+    const text = document.createElementNS(svgNS, "text");
+    text.setAttribute("x", "50");
+    text.setAttribute("y", "55");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("font-size", "5");
+    text.setAttribute("fill", "#333");
+    text.textContent = overallType;
+    svg.appendChild(text);
+
+    hexagonContainer.appendChild(svg);
+    overallDiv.appendChild(hexagonContainer);
+
     resultSection.prepend(overallDiv);
 
     // 各パラメーターの結果を表示
     for (let param in averageScores) {
         const paramDiv = document.createElement('div');
-        paramDiv.classList.add('result-parameter');
+        paramDiv.classList.add('result-parameter', 'fade-in');
 
         const paramName = document.createElement('h3');
         paramName.textContent = param;

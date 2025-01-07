@@ -9,6 +9,11 @@
 <body>
     <header>
         <h1>あなたの消費行動タイプ診断</h1>
+        <!-- プログレスバーをヘッダーに追加 -->
+        <div id="progress-container" class="hidden">
+            <div id="progress-bar"></div>
+            <span id="progress-text"></span>
+        </div>
     </header>
     
     <main>
@@ -18,7 +23,14 @@
         </section>
         
         <section id="quiz" style="display: none;">
-            <!-- 質問がここに入る -->
+            <div id="questions-container">
+                <!-- 質問がここに入る -->
+            </div>
+            <div id="navigation-buttons">
+                <button id="prev-button" style="display: none;">前へ</button>
+                <button id="next-button">次へ</button>
+                <button id="submit-button" style="display: none;">結果を見る</button>
+            </div>
         </section>
         
         <section id="result" style="display: none;">
