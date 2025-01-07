@@ -172,32 +172,30 @@ footer {
     to { opacity: 1; }
 }
 
-/* 10角形のスタイル */
+/* デカゴン（10角形）のスタイル */
 .result-hexagon {
     position: relative;
-    width: 200px; /* サイズは適宜調整 */
-    height: 115.47px; /* width / cos(30°) * sin(60°) */
-    background-color: #ffeb3b;
-    margin: 20px auto;
-    clip-path: polygon(
-        25% 6.69873%, 
-        75% 6.69873%, 
-        100% 50%, 
-        75% 93.30127%, 
-        25% 93.30127%, 
-        0% 50%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    width: 300px; /* サイズを大きく調整 */
+    height: 300px;
+    margin: 40px auto;
 }
 
-.result-hexagon:hover {
-    transform: scale(1.05);
+.result-hexagon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.result-hexagon .category-label {
+    font-size: 12px;
+    fill: #333;
+    text-anchor: middle;
+}
+
+.result-hexagon .score-text {
+    font-size: 14px;
+    fill: #333;
+    text-anchor: middle;
+    font-weight: bold;
 }
 
 /* レスポンシブデザイン */
@@ -225,6 +223,11 @@ footer {
     #progress-container {
         width: 90%;
     }
+
+    .result-hexagon {
+        width: 250px;
+        height: 250px;
+    }
 }
 
 /* 追加のレスポンシブ調整 */
@@ -251,8 +254,7 @@ footer {
     }
 
     .result-hexagon {
-        width: 150px;
-        height: 86.82px;
-        font-size: 14px;
+        width: 200px;
+        height: 200px;
     }
 }

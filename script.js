@@ -2,6 +2,7 @@ document.getElementById('start-button').addEventListener('click', () => {
     document.getElementById('introduction').style.display = 'none';
     document.getElementById('quiz').style.display = 'block';
     document.getElementById('progress-container').classList.remove('hidden');
+    currentPage = 1; // 初期ページを1に設定
     loadQuestions();
 });
 
@@ -329,7 +330,20 @@ function loadQuestions() {
 function updateProgressBar(isComplete = false) {
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
-    const progressPercent = isComplete ? 100 : ((currentPage) / totalPages) * 100;
+    let progressPercent = 0;
+
+    if (currentPage === 1) {
+        progressPercent = 0;
+    } else if (currentPage === 2) {
+        progressPercent = 20;
+    } else if (currentPage === 3) {
+        progressPercent = 40;
+    } else if (currentPage === 4) {
+        progressPercent = 60;
+    } else if (currentPage === 5) {
+        progressPercent = 80;
+    }
+
     progressBar.style.width = `${progressPercent}%`;
     progressText.textContent = `${progressPercent}%`;
 }
@@ -456,15 +470,15 @@ function displayResults(averageScores) {
     overallDesc.textContent = overallType;
     overallDiv.appendChild(overallDesc);
 
-    // 10角形（SVG）で結果を表示
-    const hexagonContainer = document.createElement('div');
-    hexagonContainer.classList.add('result-hexagon');
+    // デカゴン（10角形）で結果を表示
+    const decagonContainer = document.createElement('div');
+    decagonContainer.classList.add('result-hexagon'); // クラス名はそのまま使用
 
     // SVGを使用して10角形を作成
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
-    svg.setAttribute("width", "200");
-    svg.setAttribute("height", "200");
+    svg.setAttribute("width", "300");
+    svg.setAttribute("height", "300");
     svg.setAttribute("viewBox", "0 0 100 100");
 
     const polygon = document.createElementNS(svgNS, "polygon");
@@ -481,18 +495,37 @@ function displayResults(averageScores) {
     polygon.setAttribute("stroke-width", "1");
     svg.appendChild(polygon);
 
-    // 中央にテキストを追加
-    const text = document.createElementNS(svgNS, "text");
-    text.setAttribute("x", "50");
-    text.setAttribute("y", "55");
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-size", "5");
-    text.setAttribute("fill", "#333");
-    text.textContent = overallType;
-    svg.appendChild(text);
+    // 各カテゴリの位置にテキストを追加
+    for(let i=0; i<10; i++) {
+        const label = document.createElementNS(svgNS, "text");
+        const x = 50 + 45 * Math.cos((angle * i - 90) * Math.PI / 180);
+        const y = 50 + 45 * Math.sin((angle * i - 90) * Math.PI / 180);
+        label.setAttribute("x", x);
+        label.setAttribute("y", y);
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("font-size", "4");
+        label.classList.add("category-label");
+        label.textContent = Object.keys(averageScores)[i];
+        svg.appendChild(label);
+    }
 
-    hexagonContainer.appendChild(svg);
-    overallDiv.appendChild(hexagonContainer);
+    // 各カテゴリのスコアを表示
+    for(let i=0; i<10; i++) {
+        const param = Object.keys(averageScores)[i];
+        const score = averageScores[param];
+        const scoreX = 50 + (score * 8) * Math.cos((angle * i - 90) * Math.PI / 180);
+        const scoreY = 50 + (score * 8) * Math.sin((angle * i - 90) * Math.PI / 180);
+
+        const scoreText = document.createElementNS(svgNS, "circle");
+        scoreText.setAttribute("cx", scoreX);
+        scoreText.setAttribute("cy", scoreY);
+        scoreText.setAttribute("r", "2");
+        scoreText.setAttribute("fill", "#00796b");
+        svg.appendChild(scoreText);
+    }
+
+    decagonContainer.appendChild(svg);
+    overallDiv.appendChild(decagonContainer);
 
     resultSection.prepend(overallDiv);
 
