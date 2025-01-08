@@ -4,44 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>消費行動診断テスト</title>
+    <meta name="description" content="あなたの消費行動タイプを診断するテスト。簡単な質問に答えるだけで、あなたの消費傾向がわかります！">
+    <meta name="keywords" content="消費行動診断, 消費傾向, 行動タイプ, 購買行動">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>あなたの消費行動タイプ診断</h1>
-        <!-- プログレスバーをヘッダーに追加 -->
+        <!-- プログレスバー -->
         <div id="progress-container" class="hidden">
             <div id="progress-bar"></div>
-            <span id="progress-text"></span>
+            <span id="progress-text">0%</span>
         </div>
     </header>
-    
+
     <main>
-        <section id="introduction">
-            <p>各質問は1点から5点のスコアで評価します。<strong>5点が高くて1点が低い</strong>よ。直感で答えてね！</p>
-            <button id="start-button">診断スタート！</button>
-        </section>
-        
-        <section id="quiz" style="display: none;">
-            <div id="questions-container">
-                <!-- 質問がここに入る -->
+        <!-- クイズセクション -->
+        <section id="quiz">
+            <!-- 初めのページの説明 -->
+            <div id="intro">
+                <p>この診断では、50の質問に答えて、あなたの消費行動タイプが分かり実生活に役立ちます。</p>
+                <p>各質問は1点から5点のスコアで評価します。5点が高くて1点が低いよ。直感で答えてね！</p>
+                <!-- ユーザー同意のチェックボックスを追加 -->
+                <div class="consent">
+                    <label>
+                        <input type="checkbox" id="consent-checkbox">
+                        私は <a href="privacy.html" target="_blank">プライバシーポリシー</a> を読み、同意します。
+                    </label>
+                </div>
+                <button id="start-button" class="nav-button">診断を開始する</button>
             </div>
-            <div id="navigation-buttons">
-                <button id="prev-button" style="display: none;">前へ</button>
-                <button id="next-button">次へ</button>
-                <button id="submit-button" style="display: none;">結果を見る</button>
+            <!-- 質問コンテナ -->
+            <div id="questions-container" class="hidden">
+                <!-- 質問がここに動的に挿入されます -->
+                <!-- ナビゲーションボタンを質問コンテナ内に配置 -->
+                <div class="navigation-buttons hidden" id="navigation-buttons">
+                    <button id="prev-button" class="nav-button">前へ</button>
+                    <button id="next-button" class="nav-button">次へ</button>
+                    <button id="submit-button" class="nav-button hidden">結果を見る</button>
+                </div>
             </div>
         </section>
-        
-        <section id="result" style="display: none;">
-            <!-- 結果がここに表示される -->
+
+        <!-- 結果セクション -->
+        <section id="result" class="hidden">
+            <!-- 結果がここに動的に挿入されます -->
         </section>
     </main>
-    
+
     <footer>
-        <p>&copy; 2025 Consumption Behavior Index</p>
+        <p>&copy; 2025 あなたの名前. All rights reserved.</p>
+        <p><a href="privacy.html">プライバシーポリシー</a></p>
     </footer>
-    
+
+    <!-- JavaScriptファイルの読み込み -->
     <script src="script.js"></script>
 </body>
 </html>
