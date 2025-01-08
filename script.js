@@ -530,11 +530,11 @@ function displayResults(averageScores) {
     const svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("width", "600"); // .result-decahedronの幅に合わせる
     svg.setAttribute("height", "600");
-    svg.setAttribute("viewBox", "-50 -30 220 220"); // viewBoxを調整してラベルが見切れないようにする
+    svg.setAttribute("viewBox", "0 0 220 220"); // viewBoxを調整してラベルが見切れないようにする
 
-    // グラフを左にシフトするためのグループを作成
+    // グラフを中央に配置
     const group = document.createElementNS(svgNS, "g");
-    group.setAttribute("transform", "translate(-10,0)"); // 左に10単位シフト
+    group.setAttribute("transform", "translate(10,10)"); // 少し余白を取る
 
     // 外枠のデカゴン
     const outerPolygon = document.createElementNS(svgNS, "polygon");
