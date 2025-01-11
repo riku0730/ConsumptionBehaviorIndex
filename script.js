@@ -3,261 +3,261 @@ const questions = [
     // **1. コスパ指数（Cost-Performance Index）**
     { 
         id: 1, 
-        text: "日用品を購入する際、価格と質のバランスを重視しますか？",
+        text: "購入前に同じ商品の価格を複数の店舗やウェブサイトで比較することが多いですか？",
         parameter: "コスパ指数"
     },
     { 
         id: 2, 
-        text: "食材を選ぶ際、割引やセール品を優先しますか？",
+        text: "デザインやブランドよりも、価格と機能を優先して商品を選ぶことが多いですか？",
         parameter: "コスパ指数"
     },
     { 
         id: 3, 
-        text: "長期的に使えるものを買うために少し高い商品を選ぶことがありますか？",
+        text: "無駄を防ぐため、必要な分だけを計画的に購入していますか？",
         parameter: "コスパ指数"
     },
     { 
         id: 4, 
-        text: "不要なものを安くても買わない傾向がありますか？",
+        text: "長期間使える商品には、多少高くてもお金を出すことを躊躇しませんか？",
         parameter: "コスパ指数"
     },
     { 
         id: 5, 
-        text: "新製品が出ると、性能と価格を比較して購入を考えますか？",
+        text: "割引やポイント制度を利用するために、購入時期を調整することがありますか？",
         parameter: "コスパ指数"
     },
     // **2. 未来設計指数（Future Design Index）**
     { 
         id: 6, 
-        text: "貯金や投資など、将来のための計画を重視しますか？",
+        text: "緊急時に備えた貯金を、意識的に行っていますか？",
         parameter: "未来設計指数"
     },
     { 
         id: 7, 
-        text: "老後の生活や教育費を考慮して消費行動を決めることが多いですか？",
+        text: "将来のために、保険や投資商品を選ぶ際に内容をしっかり調べますか？",
         parameter: "未来設計指数"
     },
     { 
         id: 8, 
-        text: "高価なものでも、将来的に価値があると思えば購入しますか？",
+        text: "趣味や楽しみよりも、将来の生活の安定を優先して支出を考えることがありますか？",
         parameter: "未来設計指数"
     },
     { 
         id: 9, 
-        text: "健康や長寿のためにお金を使うことが多いですか？",
+        text: "老後の生活資金を確保するための行動を始めていますか？",
         parameter: "未来設計指数"
     },
     { 
         id: 10, 
-        text: "家計簿や予算計画を立てるのが習慣になっていますか？",
+        text: "教育やスキルアップのための支出を、短期的な楽しみより優先することがありますか？",
         parameter: "未来設計指数"
     },
     // **3. 思いやりの消費指数（Empathy Spending Index）**
     { 
         id: 11, 
-        text: "プレゼントやギフト選びに時間をかけますか？",
+        text: "贈り物を選ぶ際、自分の好みよりも相手が喜ぶことを優先しますか？",
         parameter: "思いやりの消費指数"
     },
     { 
         id: 12, 
-        text: "周囲の人に喜んでもらえる消費をすることが多いですか？",
+        text: "家族や友人のために、高品質な商品を選ぶことがありますか？",
         parameter: "思いやりの消費指数"
     },
     { 
         id: 13, 
-        text: "チャリティや寄付に積極的に参加しますか？",
+        text: "チャリティや募金活動に積極的に参加することが多いですか？",
         parameter: "思いやりの消費指数"
     },
     { 
         id: 14, 
-        text: "他人に助けを求められた際、金銭的に支援することが多いですか？",
+        text: "特別なイベントや記念日のために、他人のためにお金を使うことを惜しみませんか？",
         parameter: "思いやりの消費指数"
     },
     { 
         id: 15, 
-        text: "特別なイベントには、他人のためにお金を使うことを躊躇しませんか？",
+        text: "自分の支出が他人を喜ばせることに繋がると感じると満足感を得ますか？",
         parameter: "思いやりの消費指数"
     },
     // **4. 自己成長チャレンジ指数（Self-Growth Challenge Index）**
     { 
         id: 16, 
-        text: "新しいスキルや知識を習得するためにお金を使いますか？",
+        text: "趣味や娯楽よりも、スキルアップや健康管理にお金を使うことを優先しますか？",
         parameter: "自己成長チャレンジ指数"
     },
     { 
         id: 17, 
-        text: "資格取得や自己啓発のための本や講座に投資しますか？",
+        text: "高額でも自己成長に繋がる講座や学びのための出費を考えますか？",
         parameter: "自己成長チャレンジ指数"
     },
     { 
         id: 18, 
-        text: "セミナーやワークショップに参加することが好きですか？",
+        text: "将来のキャリアアップや学びのために、短期的な贅沢を控えることがありますか？",
         parameter: "自己成長チャレンジ指数"
     },
     { 
         id: 19, 
-        text: "健康管理やフィットネスにお金をかけることがありますか？",
+        text: "健康を保つために、ジムや健康食品などに継続的にお金を使いますか？",
         parameter: "自己成長チャレンジ指数"
     },
     { 
         id: 20, 
-        text: "学びや自己成長において価格より内容を重視しますか？",
+        text: "自己成長のための投資を最優先に考えることが多いですか？",
         parameter: "自己成長チャレンジ指数"
     },
     // **5. エコと社会貢献指数（Eco & Social Contribution Index）**
     { 
         id: 21, 
-        text: "環境に配慮した商品を選ぶことを心がけますか？",
+        text: "商品を選ぶ際、環境に配慮した素材や製造方法を重視しますか？",
         parameter: "エコと社会貢献指数"
     },
     { 
         id: 22, 
-        text: "持続可能なライフスタイルに興味がありますか？",
+        text: "リサイクル可能な商品やエコ対応の包装を積極的に選びますか？",
         parameter: "エコと社会貢献指数"
     },
     { 
         id: 23, 
-        text: "リサイクル可能なものを優先的に購入しますか？",
+        text: "サステナブルなブランドを応援するために、その商品を購入することがありますか？",
         parameter: "エコと社会貢献指数"
     },
     { 
         id: 24, 
-        text: "地元の小規模事業やフェアトレード商品を選ぶことが多いですか？",
+        text: "地域産の商品を全国ブランドよりも優先して購入することがありますか？",
         parameter: "エコと社会貢献指数"
     },
     { 
         id: 25, 
-        text: "無駄を省く消費行動を常に意識していますか？",
+        text: "自分の消費が環境や社会に良い影響を与えると考えると満足感を得ますか？",
         parameter: "エコと社会貢献指数"
     },
     // **6. 楽しみと癒し指数（Joy & Relaxation Index）**
     { 
         id: 26, 
-        text: "旅行やレジャーにお金を使うことを楽しみますか？",
+        text: "家計を管理する中で、旅行や趣味にお金を使うことを優先しますか？",
         parameter: "楽しみと癒し指数"
     },
     { 
         id: 27, 
-        text: "趣味や娯楽に時間とお金を費やすことが多いですか？",
+        text: "自分へのご褒美として、特別な体験や贅沢品を購入することがありますか？",
         parameter: "楽しみと癒し指数"
     },
     { 
         id: 28, 
-        text: "美味しい食事や特別な体験にお金をかけることが好きですか？",
+        text: "日々のストレス解消のために、予定外の支出をすることがありますか？",
         parameter: "楽しみと癒し指数"
     },
     { 
         id: 29, 
-        text: "ストレス発散のために消費することが多いですか？",
+        text: "生活の実用性よりも、自分の楽しみにお金を使うことが多いですか？",
         parameter: "楽しみと癒し指数"
     },
     { 
         id: 30, 
-        text: "日々の小さな楽しみ（カフェ、スイーツなど）に投資するのが好きですか？",
+        text: "趣味や娯楽への支出が、生活の大きな満足感に繋がると感じますか？",
         parameter: "楽しみと癒し指数"
     },
     // **7. 安心と備え指数（Security & Preparedness Index）**
     { 
         id: 31, 
-        text: "緊急事態や災害に備えて物資を購入することが多いですか？",
+        text: "災害時の備蓄品や非常食を定期的に確認・補充していますか？",
         parameter: "安心と備え指数"
     },
     { 
         id: 32, 
-        text: "健康保険や生命保険に加入する際、慎重に選びますか？",
+        text: "健康や安全に関する商品やサービスには、他の支出より優先的にお金を使いますか？",
         parameter: "安心と備え指数"
     },
     { 
         id: 33, 
-        text: "万が一に備えた貯蓄や商品を購入することがありますか？",
+        text: "必要以上の備えは避けつつも、最低限のリスク対策を行っていますか？",
         parameter: "安心と備え指数"
     },
     { 
         id: 34, 
-        text: "安全性を優先して高価な商品を選ぶことがありますか？",
+        text: "保険やセキュリティ対策など、安心感を得るための支出を重視しますか？",
         parameter: "安心と備え指数"
     },
     { 
         id: 35, 
-        text: "家族や自分のための保険や保証制度を重視しますか？",
+        text: "緊急時に必要な準備を整えていると自信を持って言えますか？",
         parameter: "安心と備え指数"
     },
     // **8. 日常のアート指数（Everyday Artfulness Index）**
     { 
         id: 36, 
-        text: "デザインや美しさを重視して商品を選ぶことが多いですか？",
+        text: "デザインや美しさを重視して、実用性を二の次にすることがありますか？",
         parameter: "日常のアート指数"
     },
     { 
         id: 37, 
-        text: "自分が気に入るアートや装飾品にお金を使いますか？",
+        text: "生活空間を美しく整えるために、少し高価なインテリアを購入することがありますか？",
         parameter: "日常のアート指数"
     },
     { 
         id: 38, 
-        text: "ファッションやインテリアのセンスにこだわりますか？",
+        text: "自分の個性を表現できるファッションや雑貨を選ぶことが多いですか？",
         parameter: "日常のアート指数"
     },
     { 
         id: 39, 
-        text: "見た目や外見の美しさにお金をかけることが多いですか？",
+        text: "見た目の美しさを優先して商品を購入することが多いですか？",
         parameter: "日常のアート指数"
     },
     { 
         id: 40, 
-        text: "ユニークで個性的な商品を選ぶ傾向がありますか？",
+        text: "流行やおしゃれさを重要視して商品を選びますか？",
         parameter: "日常のアート指数"
     },
     // **9. 実用性へのこだわり指数（Practicality Focus Index）**
     { 
         id: 41, 
-        text: "実用的で機能的な商品を優先して選びますか？",
+        text: "日常的に多用途で使える商品を選ぶことを重視しますか？",
         parameter: "実用性へのこだわり指数"
     },
     { 
         id: 42, 
-        text: "必要最低限のもので生活を整えるのが得意ですか？",
+        text: "耐久性が高い商品を見た目より優先して購入しますか？",
         parameter: "実用性へのこだわり指数"
     },
     { 
         id: 43, 
-        text: "消耗品は価格よりも性能を重視して選びますか？",
+        text: "必要最低限の機能があれば十分だと感じることが多いですか？",
         parameter: "実用性へのこだわり指数"
     },
     { 
         id: 44, 
-        text: "多目的に使える商品を選ぶことが多いですか？",
+        text: "購入する際、商品のレビューや評価を確認する習慣がありますか？",
         parameter: "実用性へのこだわり指数"
     },
     { 
         id: 45, 
-        text: "買い物では「役に立つかどうか」を最優先に考えますか？",
+        text: "実用性の高い商品を選ぶことが満足感に繋がりますか？",
         parameter: "実用性へのこだわり指数"
     },
     // **10. ブランド価値観指数（Brand Values Index）**
     { 
         id: 46, 
-        text: "ブランド品を選ぶ際、そのブランドの信頼性を重視しますか？",
+        text: "信頼できるブランドの商品を選ぶことが多いですか？",
         parameter: "ブランド価値観指数"
     },
     { 
         id: 47, 
-        text: "高級ブランドや限定品に魅力を感じることがありますか？",
+        text: "ブランドの社会貢献やストーリーに共感して商品を購入しますか？",
         parameter: "ブランド価値観指数"
     },
     { 
         id: 48, 
-        text: "他人に良い印象を与えるためにブランド品を購入することがありますか？",
+        text: "ブランド品に投資することを、自分のステータス向上と感じることがありますか？",
         parameter: "ブランド価値観指数"
     },
     { 
         id: 49, 
-        text: "ブランドの社会的責任（CSR）を気にすることが多いですか？",
+        text: "他人に良い印象を与えるためにブランド品を購入することがありますか？",
         parameter: "ブランド価値観指数"
     },
     { 
         id: 50, 
-        text: "商品を購入する際、ブランド名で判断することが多いですか？",
+        text: "ブランドの品質を信頼しているため、多少高価でも購入を考えますか？",
         parameter: "ブランド価値観指数"
     },
 ];
@@ -272,9 +272,12 @@ let userAnswers = {};
 
 // ページロード時に初期設定
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("ページがロードされました");
     const startButton = document.getElementById('start-button');
     startButton.addEventListener('click', () => {
+        console.log("スタートボタンがクリックされました");
         if (document.getElementById('consent-checkbox').checked) {
+            console.log("プライバシーポリシーに同意しました");
             document.getElementById('intro').classList.add('hidden');
             document.getElementById('progress-container').classList.remove('hidden');
             document.getElementById('questions-container').classList.remove('hidden');
@@ -289,20 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ロードされた質問を表示
 function loadQuestions() {
+    console.log(`現在のページ: ${currentPage}`);
     const questionsContainer = document.getElementById('questions-container');
     const navigationButtons = document.getElementById('navigation-buttons');
-    // 質問コンテナをクリア
-    questionsContainer.innerHTML = `
-        <!-- 質問がここに動的に挿入されます -->
-        <!-- ナビゲーションボタンを質問コンテナ内に配置 -->
-        <div class="navigation-buttons hidden" id="navigation-buttons">
-            <button id="prev-button" class="nav-button">前へ</button>
-            <button id="next-button" class="nav-button">次へ</button>
-            <button id="submit-button" class="nav-button hidden">結果を見る</button>
-        </div>
-    `;
-    // 上書きされたため、再度取得
-    const updatedNavigationButtons = document.getElementById('navigation-buttons');
+
+    // 質問コンテナをクリア（ナビゲーションボタンを保持）
+    questionsContainer.innerHTML = ''; // 完全にクリア
+
+    // 質問コンテナにナビゲーションボタンを再追加
+    questionsContainer.appendChild(navigationButtons);
 
     // 質問データを表示
     const start = (currentPage - 1) * questionsPerPage;
@@ -335,11 +333,8 @@ function loadQuestions() {
             questionDiv.appendChild(label);
         }
 
-        questionsContainer.insertBefore(questionDiv, updatedNavigationButtons);
+        questionsContainer.insertBefore(questionDiv, navigationButtons);
     });
-
-    // ナビゲーションボタンを再度設定
-    updatedNavigationButtons.classList.remove('hidden');
 
     // ナビゲーションボタンの表示/非表示を調整
     const prevButton = document.getElementById('prev-button');
@@ -348,10 +343,10 @@ function loadQuestions() {
 
     if(currentPage === 1) {
         prevButton.classList.add('hidden');
-        updatedNavigationButtons.classList.add('single-button'); // 1ページ目は右揃え
+        navigationButtons.classList.add('single-button'); // 1ページ目は右揃え
     } else {
         prevButton.classList.remove('hidden');
-        updatedNavigationButtons.classList.remove('single-button');
+        navigationButtons.classList.remove('single-button');
     }
 
     if(currentPage < totalPages) {
@@ -378,49 +373,52 @@ function updateProgressBar() {
     progressPercent = ((currentPage - 1) / totalPages) * 100;
     progressBar.style.width = `${progressPercent}%`;
     progressText.textContent = `${progressPercent.toFixed(0)}%`;
+    console.log(`プログレスバーを更新: ${progressPercent}%`);
 }
 
 // ナビゲーションボタンのイベントを設定
 function setNavigationButtonEvents() {
+    console.log("ナビゲーションボタンのイベントを設定します");
     const nextButton = document.getElementById('next-button');
     const prevButton = document.getElementById('prev-button');
     const submitButton = document.getElementById('submit-button');
 
-    // イベントリスナーを一度削除してから再設定（重複防止）
-    nextButton.replaceWith(nextButton.cloneNode(true));
-    const newNextButton = document.getElementById('next-button');
+    // 既存のイベントリスナーをクリアするためにボタンを新しくするのは避ける
+    // 代わりに、removeEventListenerを使用するか、イベントハンドラを直接設定
 
-    prevButton.replaceWith(prevButton.cloneNode(true));
-    const newPrevButton = document.getElementById('prev-button');
-
-    submitButton.replaceWith(submitButton.cloneNode(true));
-    const newSubmitButton = document.getElementById('submit-button');
-
-    newNextButton.addEventListener('click', () => {
+    // イベントリスナーを一度クリアする方法（匿名関数のため難しいため、直接設定）
+    // 次へボタン
+    nextButton.onclick = () => {
+        console.log("次へボタンがクリックされました");
         if(saveAnswers()) {
             currentPage++;
             loadQuestions();
             updateProgressBar();
             window.scrollTo(0, 0); // ページトップにスクロール
         }
-    });
+    };
 
-    newPrevButton.addEventListener('click', () => {
+    // 前へボタン
+    prevButton.onclick = () => {
+        console.log("前へボタンがクリックされました");
         currentPage--;
         loadQuestions();
         updateProgressBar();
         window.scrollTo(0, 0); // ページトップにスクロール
-    });
+    };
 
-    newSubmitButton.addEventListener('click', () => {
+    // 結果を見るボタン
+    submitButton.onclick = () => {
+        console.log("結果を見るボタンがクリックされました");
         if(saveAnswers()) {
             calculateResults();
         }
-    });
+    };
 }
 
 // ユーザーの回答を保存する関数
 function saveAnswers() {
+    console.log("ユーザーの回答を保存します");
     const currentQuestions = questions.slice((currentPage -1) * questionsPerPage, currentPage * questionsPerPage);
     let allAnswered = true;
 
@@ -440,14 +438,17 @@ function saveAnswers() {
 
     if (!allAnswered) {
         alert("全ての質問に回答してください！");
+        console.log("全ての質問に回答されていません");
         return false;
     }
 
+    console.log("全ての質問に回答済み");
     return true;
 }
 
 // 診断結果を計算する関数
 function calculateResults() {
+    console.log("診断結果を計算中...");
     const scores = {
         "コスパ指数": [],
         "未来設計指数": [],
@@ -474,6 +475,7 @@ function calculateResults() {
 
     if (!allAnswered) {
         alert("全ての質問に回答してください！");
+        console.log("全ての質問に回答されていません");
         return;
     }
 
@@ -485,15 +487,20 @@ function calculateResults() {
         averageScores[param] = avg.toFixed(1);
     }
 
+    console.log("平均スコア:", averageScores);
     displayResults(averageScores);
 }
 
 // 結果を表示する関数
 function displayResults(averageScores) {
+    console.log("診断結果を表示します");
     // プログレスバーを非表示にする
     document.getElementById('progress-container').classList.add('hidden');
     
-    document.getElementById('quiz').style.display = 'none';
+    // クイズコンテナを非表示にする
+    document.getElementById('questions-container').style.display = 'none';
+    
+    // 結果セクションを表示する
     const resultSection = document.getElementById('result');
     resultSection.style.display = 'block';
 
@@ -501,7 +508,7 @@ function displayResults(averageScores) {
     resultSection.innerHTML = '';
 
     // 全体的な評価
-    const highParams = Object.keys(averageScores).filter(param => averageScores[param] >= 4.0);
+    const highParams = Object.keys(averageScores).filter(param => averageScores[param] >= 4.0); // 4.0以上を高スコアとする
     let overallType = "バランスの取れた消費者タイプ！";
 
     if (highParams.length === 1) {
@@ -510,6 +517,7 @@ function displayResults(averageScores) {
         overallType = `${highParams.join('、')}を重視する消費者タイプ！`;
     }
 
+    // 全体的な評価を作成
     const overallDiv = document.createElement('div');
     overallDiv.classList.add('overall-result', 'fade-in');
 
@@ -581,7 +589,7 @@ function displayResults(averageScores) {
     // ユーザーのスコアをプロットする
     const scorePoints = [];
     categories.forEach((param, i) => {
-        const score = averageScores[param];
+        const score = parseFloat(averageScores[param]);
         // スコア1〜5をスケールして半径を決定（1〜5を0〜90にスケーリング）
         const scaledScore = ((score - 1) / 4) * 90; // スコア1が0、スコア5が90
         const scoreX = 100 + scaledScore * Math.cos((angle * i - 90) * Math.PI / 180);
@@ -600,7 +608,7 @@ function displayResults(averageScores) {
 
     // 各スコアポイントに円を描画
     categories.forEach((param, i) => {
-        const score = averageScores[param];
+        const score = parseFloat(averageScores[param]);
         const scaledScore = ((score - 1) / 4) * 90;
         const scoreX = 100 + scaledScore * Math.cos((angle * i - 90) * Math.PI / 180);
         const scoreY = 100 + scaledScore * Math.sin((angle * i - 90) * Math.PI / 180);
@@ -617,7 +625,17 @@ function displayResults(averageScores) {
     decagonContainer.appendChild(svg);
     overallDiv.appendChild(decagonContainer);
 
-    resultSection.prepend(overallDiv);
+    // グラフとテキストをまとめて配置
+    const combinedContainer = document.createElement('div');
+    combinedContainer.style.display = 'flex';
+    combinedContainer.style.flexDirection = 'column';
+    combinedContainer.style.alignItems = 'center';
+    combinedContainer.style.gap = '20px'; // グラフとテキストの間隔を調整
+
+    combinedContainer.appendChild(decagonContainer);
+    combinedContainer.appendChild(overallDiv);
+
+    resultSection.appendChild(combinedContainer);
 
     // 各パラメーターの結果を表示
     for (let param in averageScores) {
@@ -635,7 +653,7 @@ function displayResults(averageScores) {
         // スコアの意味と追加情報を追加
         const scoreDesc = document.createElement('p');
         const score = parseFloat(averageScores[param]);
-        if (score >= 4.0) {
+        if (score >= 4.0) { // 高スコア（80%以上）
             scoreDesc.textContent = "高い意識";
             scoreDesc.style.color = "#4CAF50"; // 緑
             // 高スコアの特徴を追加
@@ -643,10 +661,15 @@ function displayResults(averageScores) {
             feature.textContent = getHighScoreFeature(param);
             feature.style.color = "#388E3C";
             paramDiv.appendChild(feature);
-        } else if (score >= 3.0) {
+        } else if (score >= 3.0) { // 中スコア（50〜79%）
             scoreDesc.textContent = "中程度の意識";
             scoreDesc.style.color = "#FFC107"; // 黄色
-        } else {
+            // 中スコアの説明を追加
+            const mediumDesc = document.createElement('p');
+            mediumDesc.textContent = getMediumScoreDescription(param);
+            mediumDesc.style.color = "#FF9800";
+            paramDiv.appendChild(mediumDesc);
+        } else { // 低スコア（49%以下）
             scoreDesc.textContent = "低い意識";
             scoreDesc.style.color = "#F44336"; // 赤
             // 低スコアの改善提案を追加
@@ -663,33 +686,50 @@ function displayResults(averageScores) {
     // 高スコアの特徴を返す関数（各パラメーターごとにカスタマイズ）
     function getHighScoreFeature(param) {
         const features = {
-            "コスパ指数": "コスパに優れた消費者タイプ！お得な買い物を楽しんでいます。",
-            "未来設計指数": "未来を見据えた計画的な消費者タイプ！将来のために賢くお金を使っています。",
-            "思いやりの消費指数": "思いやりのある消費者タイプ！周囲の人を大切にするためにお金を使います。",
-            "自己成長チャレンジ指数": "自己成長を重視する消費者タイプ！常にスキルや知識を磨いています。",
-            "エコと社会貢献指数": "エコ意識が高い消費者タイプ！環境や社会に配慮した選択をしています。",
-            "楽しみと癒し指数": "楽しみと癒しを大切にする消費者タイプ！日常に彩りを加えています。",
-            "安心と備え指数": "安心と備えを重視する消費者タイプ！リスクに備えて賢くお金を使います。",
-            "日常のアート指数": "アートを愛する消費者タイプ！美しいデザインや個性的な商品を選びます。",
-            "実用性へのこだわり指数": "実用性を重視する消費者タイプ！必要なものを効率的に選んでいます。",
-            "ブランド価値観指数": "ブランド価値を重視する消費者タイプ！信頼できるブランドを選んでいます。"
+            "コスパ指数": "あなたは価格と価値を非常に重視する消費者です。商品の価格や機能を徹底的に比較し、より良い選択をすることを心がけています。このスキルは、長期的な節約や効率的な消費に大きく役立つでしょう。",
+            "未来設計指数": "あなたは計画的な消費を重視するタイプです。将来の生活や安心感を見据えて、貯蓄やリスク対策をしっかり行っています。この姿勢は長期的な成功や安定につながります。",
+            "思いやりの消費指数": "あなたは他人のためにお金を使うことに喜びを感じる、思いやりのある消費者です。贈り物や特別なイベントに積極的にお金を使い、周囲の人々を喜ばせることを大切にしています。",
+            "自己成長チャレンジ指数": "あなたは自己成長のための投資に積極的です。学びやスキルアップ、健康管理に対して高い意識を持ち、それに対する支出を惜しみません。この姿勢はあなたの将来に大きく役立つでしょう。",
+            "エコと社会貢献指数": "あなたは環境や社会貢献を非常に重視する消費者です。エコ商品やサステナブルブランドを選び、消費を通じて社会や環境に貢献することを大切にしています。",
+            "楽しみと癒し指数": "あなたは自分の楽しみや癒しを重視するタイプです。趣味や娯楽、旅行などに積極的にお金を使い、日常生活を充実させています。",
+            "安心と備え指数": "あなたは安全性やリスクへの備えを重視する消費者です。非常食や保険、健康対策など、将来への備えに対する意識が非常に高いです。",
+            "日常のアート指数": "あなたはデザインや美しさを非常に重視する消費者です。商品の実用性だけでなく、見た目や感性を大切にした選択を行うことが特徴です。",
+            "実用性へのこだわり指数": "あなたは実用性や効率性を非常に重視する消費者です。商品の耐久性や多用途性を重要視し、日常の効率的な消費を心がけています。",
+            "ブランド価値観指数": "あなたはブランド価値を非常に重視するタイプです。信頼性やステータスを求め、ブランド品に積極的に投資します。"
         };
         return features[param] || "";
+    }
+
+    // 中スコアの説明文を返す関数（各パラメーターごとにカスタマイズ）
+    function getMediumScoreDescription(param) {
+        const mediumDescriptions = {
+            "コスパ指数": "あなたはコスパを意識する一方で、必要に応じて価格以外の価値を重視する柔軟なタイプです。賢い買い物を意識しつつ、デザインや品質など他の要素も大事にしています。",
+            "未来設計指数": "あなたは未来設計を意識しつつも、日常の楽しみや必要性とのバランスを大切にしています。柔軟な判断ができるため、計画と実際の消費の両方を上手く組み合わせています。",
+            "思いやりの消費指数": "あなたは他人への配慮を持ちながらも、自分のニーズとのバランスを大切にするタイプです。適度に他人を喜ばせつつ、無理のない範囲で消費行動を行っています。",
+            "自己成長チャレンジ指数": "あなたは自己成長を意識しつつも、日常の消費や楽しみとのバランスを大切にしています。状況に応じて適切に成長のための投資を行っています。",
+            "エコと社会貢献指数": "あなたは環境や社会貢献に対して適度な関心を持つタイプです。状況に応じてエコや社会的な要素を意識して選ぶことがあります。",
+            "楽しみと癒し指数": "あなたは楽しみや癒しを重視しつつも、必要に応じて節約や計画性も意識するタイプです。バランスの取れた消費行動が特徴です。",
+            "安心と備え指数": "あなたは安全性やリスク対策を適度に意識しつつ、日常の消費とのバランスを取るタイプです。必要に応じて備える柔軟性があります。",
+            "日常のアート指数": "あなたはデザインや美しさを意識しつつも、価格や実用性も考慮したバランス型の消費者です。",
+            "実用性へのこだわり指数": "あなたは実用性を意識しつつも、状況に応じてデザインやブランドを考慮する柔軟な消費者です。",
+            "ブランド価値観指数": "あなたはブランド価値を意識しつつも、必要に応じて価格や実用性を重視する柔軟なタイプです。"
+        };
+        return mediumDescriptions[param] || "";
     }
 
     // 低スコアの改善提案を返す関数（各パラメーターごとにカスタマイズ）
     function getLowScoreSuggestion(param) {
         const suggestions = {
-            "コスパ指数": "コスパを意識してみましょう。価格と品質のバランスを考えて買い物をすると良いですよ。",
-            "未来設計指数": "将来の計画を立てることをお勧めします。貯金や投資を始めてみましょう。",
-            "思いやりの消費指数": "周囲の人への思いやりを持つことも大切です。ギフト選びや寄付などを検討してみてください。",
-            "自己成長チャレンジ指数": "自己成長にもっと力を入れてみましょう。新しいスキルや知識を習得するための時間を作ってみてください。",
-            "エコと社会貢献指数": "環境や社会に配慮した消費を心がけてみましょう。リサイクルやフェアトレード商品を選ぶと良いですよ。",
-            "楽しみと癒し指数": "日常の楽しみを増やしてみましょう。趣味やレジャーに少しずつ時間を使ってみてください。",
-            "安心と備え指数": "リスクに備えるための準備を始めましょう。保険や緊急備蓄を検討してみてください。",
-            "日常のアート指数": "デザインやアートにもっと興味を持ってみましょう。美しいものに触れることで生活が豊かになります。",
-            "実用性へのこだわり指数": "実用性を意識してみましょう。必要なものを優先的に選ぶことで、生活がスムーズになります。",
-            "ブランド価値観指数": "信頼できるブランドを探してみましょう。ブランドの背景や価値観を調べて選ぶと良いですよ。"
+            "コスパ指数": "あなたはコスパよりも他の価値（デザインやブランド、感覚的な要素など）を優先する消費傾向があります。価格を気にしない分、消費における自由度が高いタイプです。",
+            "未来設計指数": "あなたは未来設計よりも現在の生活や楽しみに重きを置く傾向があります。短期的な満足感を優先するタイプですが、将来の計画を少し意識することで、さらなる安心感を得られるかもしれません。",
+            "思いやりの消費指数": "あなたは自分のための消費を優先する傾向があります。他人への配慮よりも、自分の満足感や価値観を重視するタイプです。",
+            "自己成長チャレンジ指数": "あなたは自己成長への投資よりも、日常の楽しみや他の目的を優先する傾向があります。ただ、少し意識を向けることで新しい可能性が広がるかもしれません。",
+            "エコと社会貢献指数": "あなたは環境や社会貢献よりも、価格や実用性など他の要素を優先する消費傾向があります。ただ、少し意識を向けることで新しい選択肢が広がるかもしれません。",
+            "楽しみと癒し指数": "あなたは楽しみや癒しよりも、実用性や必要性を優先する消費傾向があります。少し自分の楽しみに目を向けても良いかもしれません。",
+            "安心と備え指数": "あなたは安全性やリスクへの備えよりも、現在の楽しみや必要性を優先する傾向があります。少し意識を向けることで安心感が増すかもしれません。",
+            "日常のアート指数": "あなたはデザインや美しさよりも、実用性や価格を優先する傾向があります。ただ、少し美的な要素に目を向けることで新たな満足感を得られるかもしれません。",
+            "実用性へのこだわり指数": "あなたは実用性よりも、感覚的な要素やデザインなどを優先する傾向があります。ただ、少し実用性に目を向けることで選択肢が広がるかもしれません。",
+            "ブランド価値観指数": "あなたはブランドよりも、価格や実用性、デザインなど他の要素を優先する消費傾向があります。"
         };
         return suggestions[param] || "";
     }
