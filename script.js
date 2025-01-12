@@ -491,7 +491,7 @@ function calculateResults() {
     displayResults(averageScores);
 }
 
-// 結果を表示する関数
+// 診断結果を表示する関数
 function displayResults(averageScores) {
     console.log("診断結果を表示します");
     // プログレスバーを非表示にする
@@ -509,13 +509,7 @@ function displayResults(averageScores) {
 
     // 全体的な評価
     const highParams = Object.keys(averageScores).filter(param => averageScores[param] >= 4.0); // 4.0以上を高スコアとする
-    let overallType = "バランスの取れた消費者タイプ！";
-
-    if (highParams.length === 1) {
-        overallType = `${highParams[0]}を重視する消費者タイプ！`;
-    } else if (highParams.length > 1) {
-        overallType = `${highParams.join('、')}を重視する消費者タイプ！`;
-    }
+    let overallType = getOverallType(highParams.length); // 修正箇所
 
     // 全体的な評価を作成
     const overallDiv = document.createElement('div');
@@ -732,6 +726,24 @@ function displayResults(averageScores) {
             "ブランド価値観指数": "あなたはブランドよりも、価格や実用性、デザインなど他の要素を優先する消費傾向があります。"
         };
         return suggestions[param] || "";
+    }
+
+    // 新しく追加する関数: 高スコアの個数に応じたタイプを返す
+    function getOverallType(count) {
+        const typeMapping = {
+            0: "ニュートラル型",
+            1: "単軸特化型",
+            2: "デュアルフォーカス型",
+            3: "トリプルフォーカス型",
+            4: "バランス重視型",
+            5: "マルチバランサー型",
+            6: "多軸エキスパート",
+            7: "多面的スペシャリスト",
+            8: "万能型プレイヤー",
+            9: "オールラウンドマスター",
+            10: "パーフェクトバランサー"
+        };
+        return typeMapping[count] || "バランスの取れた消費者タイプ！"; // デフォルト値
     }
 
     // ユーザーデータをGoogle Sheetsに送信する関数
