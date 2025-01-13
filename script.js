@@ -778,7 +778,7 @@ function displayResults(averageScores) {
 
     // ユーザーデータをGoogle Sheetsに送信する関数
     function sendDataToGoogleSheets(data) {
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxpsK_P3LQVHTJ2sXBGZq4zlpQR22xE5K7_u6xUoKAiDVOlgbCzcaw1ODvhCuTUqrmAzQ/exec"; // 新しいURLに更新
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwSftR7MrkwxDASiXiKQkEbbjHQWkueHyCUfzKyi39x8itC_AAcuXuYdH_iyaCW3MDUfw/exec"; // 正しいURLに更新
 
         // userAnswers から answers 配列を構築
         const answers = [];
