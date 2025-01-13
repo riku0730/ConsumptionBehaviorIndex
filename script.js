@@ -614,7 +614,7 @@ function displayResults(averageScores) {
     const scorePoints = [];
     categories.forEach((param, i) => {
         const score = parseFloat(averageScores[param]);
-        // スコア1〜5をスケールして半径を決定（1〜5を0〜90にスケーリング）
+        // スコア1～5をスケールして半径を決定（1～5を0～90にスケーリング）
         const scaledScore = ((score - 1) / 4) * 90; // スコア1が0、スコア5が90
         const scoreX = 100 + scaledScore * Math.cos((angle * i - 90) * Math.PI / 180);
         const scoreY = 100 + scaledScore * Math.sin((angle * i - 90) * Math.PI / 180);
@@ -778,27 +778,96 @@ function displayResults(averageScores) {
 
     // ユーザーデータをGoogle Sheetsに送信する関数
     function sendDataToGoogleSheets(data) {
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'; // ここにデプロイしたApps ScriptのURLを貼り付け
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwTNBjy_y5Yx3R49QbM0qNOWdva4K7ltygYNEbzOXwVqOrPGzz8gogJHUYX07gq7Z9L2w/exec"; // ここにデプロイしたApps ScriptのURLを貼り付け
+
+        // userAnswers から answers 配列を構築
+        const answers = [];
+        for(let i = 1; i <= 50; i++) {
+            answers.push(data[`question-${i}`]);
+        }
+
+        // 各指数の平均スコアを構築
+        const indexAverages = {
+            "コスパ指数": parseFloat(data["コスパ指数"]),
+            "未来設計指数": parseFloat(data["未来設計指数"]),
+            "思いやりの消費指数": parseFloat(data["思いやりの消費指数"]),
+            "自己成長チャレンジ指数": parseFloat(data["自己成長チャレンジ指数"]),
+            "エコと社会貢献指数": parseFloat(data["エコと社会貢献指数"]),
+            "楽しみと癒し指数": parseFloat(data["楽しみと癒し指数"]),
+            "安心と備え指数": parseFloat(data["安心と備え指数"]),
+            "日常のアート指数": parseFloat(data["日常のアート指数"]),
+            "実用性へのこだわり指数": parseFloat(data["実用性へのこだわり指数"]),
+            "ブランド価値観指数": parseFloat(data["ブランド価値観指数"])
+        };
+
+        // 送信データの構築
+        const dataToSend = {
+            age: data.age,
+            gender: data.gender,
+            answers: answers,
+            ...indexAverages
+        };
 
         showLoading(); // ローディング表示
 
         fetch(scriptURL, {
             method: 'POST',
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(dataToSend)
         })
         .then(response => response.json())
         .then(response => {
             console.log('Success:', response);
             hideLoading(); // ローディング非表示
+            if(response.result === "success") {
+                alert('データの送信に成功しました！');
+                // 必要に応じてフォームのリセットや結果ページへの遷移など
+                resetForm(); // フォームのリセット
+            } else {
+                alert('データ送信に失敗しました: ' + response.message);
+            }
         })
         .catch(error => {
             console.error('Error:', error);
             hideLoading(); // ローディング非表示
+            alert('データ送信中にエラーが発生しました。再度お試しください。');
         });
+    }
+
+    // フォームをリセットする関数
+    function resetForm() {
+        // プログレスバーをリセット
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        progressBar.style.width = `0%`;
+        progressText.textContent = `0%`;
+
+        // 結果セクションを非表示にする
+        const resultSection = document.getElementById('result');
+        resultSection.style.display = 'none';
+
+        // イントロを再表示し、フォームをリセット
+        document.getElementById('intro').classList.remove('hidden');
+        document.getElementById('questions-container').style.display = 'none';
+        document.getElementById('progress-container').classList.add('hidden');
+
+        // ユーザーの回答をリセット
+        userAnswers = {};
+
+        // 現在のページをリセット
+        currentPage = 1;
+
+        // フォームのリセット
+        const ageSelect = document.getElementById('user-age');
+        ageSelect.selectedIndex = 0;
+
+        const genderElements = document.getElementsByName('user-gender');
+        genderElements.forEach(radio => radio.checked = false);
+
+        const consentCheckbox = document.getElementById('consent-checkbox');
+        consentCheckbox.checked = false;
     }
 
     // ローディングインジケーターの表示・非表示を制御
