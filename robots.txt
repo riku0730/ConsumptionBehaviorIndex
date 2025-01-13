@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://riku0730.github.io/ConsumptionBehaviorIndex/sitemap.xml

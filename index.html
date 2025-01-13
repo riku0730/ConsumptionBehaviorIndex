@@ -6,6 +6,29 @@
     <title>消費行動診断テスト</title>
     <meta name="description" content="あなたの消費行動タイプを診断するテスト。簡単な質問に答えるだけで、あなたの消費傾向がわかります！">
     <meta name="keywords" content="消費行動診断, 消費傾向, 行動タイプ, 購買行動">
+
+    <!-- Open Graph メタタグ -->
+    <meta property="og:title" content="支出行動の性格診断">
+    <meta property="og:description" content="あなたの支出行動を診断し、性格を分析します。楽しく簡単に自己理解を深めましょう！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://riku0730.github.io/ConsumptionBehaviorIndex/">
+    <!-- 画像がない場合は後で追加 -->
+    <!-- <meta property="og:image" content="https://riku0730.github.io/ConsumptionBehaviorIndex/images/og-image.jpg"> -->
+
+    <!-- Twitter Card メタタグ -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="支出行動の性格診断">
+    <meta name="twitter:description" content="あなたの支出行動を診断し、性格を分析します。楽しく簡単に自己理解を深めましょう！">
+    <!-- 画像がない場合は後で追加 -->
+    <!-- <meta name="twitter:image" content="https://riku0730.github.io/ConsumptionBehaviorIndex/images/twitter-image.jpg"> -->
+
+    <!-- ファビコン -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon_io/site.webmanifest">
+    <link rel="shortcut icon" href="images/favicon_io/favicon.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="style.css">
     <!-- jsPDF と html2canvas のライブラリを追加 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -31,7 +54,7 @@
                 <!-- ユーザー同意のチェックボックスを追加 -->
                 <div class="consent">
                     <label>
-                        <input type="checkbox" id="consent-checkbox">
+                        <input type="checkbox" id="consent-checkbox" required>
                         私は <a href="privacy.html" target="_blank">プライバシーポリシー</a> を読み、同意します。
                     </label>
                 </div>
