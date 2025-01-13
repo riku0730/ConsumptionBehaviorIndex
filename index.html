@@ -7,6 +7,9 @@
     <meta name="description" content="あなたの消費行動タイプを診断するテスト。簡単な質問に答えるだけで、あなたの消費傾向がわかります！">
     <meta name="keywords" content="消費行動診断, 消費傾向, 行動タイプ, 購買行動">
     <link rel="stylesheet" href="style.css">
+    <!-- jsPDF と html2canvas のライブラリを追加 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <header>
@@ -30,6 +33,36 @@
                     <label>
                         <input type="checkbox" id="consent-checkbox">
                         私は <a href="privacy.html" target="_blank">プライバシーポリシー</a> を読み、同意します。
+                    </label>
+                </div>
+                <!-- ユーザー情報の入力欄を追加 -->
+                <div class="user-info">
+                    <label for="user-age">年代:</label>
+                    <select id="user-age" name="user-age" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="10代未満">10代未満</option>
+                        <option value="10代">10代</option>
+                        <option value="20代">20代</option>
+                        <option value="30代">30代</option>
+                        <option value="40代">40代</option>
+                        <option value="50代">50代</option>
+                        <option value="60代">60代</option>
+                        <option value="70代">70代</option>
+                        <option value="80代以上">80代以上</option>
+                    </select>
+                    <br>
+                    <label>性別:</label>
+                    <label>
+                        <input type="radio" name="user-gender" value="男性" required>
+                        男性
+                    </label>
+                    <label>
+                        <input type="radio" name="user-gender" value="女性" required>
+                        女性
+                    </label>
+                    <label>
+                        <input type="radio" name="user-gender" value="その他" required>
+                        その他
                     </label>
                 </div>
                 <button id="start-button" class="nav-button">診断を開始する</button>
@@ -56,6 +89,11 @@
         <p>&copy; 2025 あなたの名前. All rights reserved.</p>
         <p><a href="privacy.html">プライバシーポリシー</a></p>
     </footer>
+
+    <!-- ローディングインジケーターを追加 -->
+    <div id="loading" class="hidden">
+        <p>処理中です...お待ちください。</p>
+    </div>
 
     <!-- JavaScriptファイルの読み込み -->
     <script src="script.js"></script>

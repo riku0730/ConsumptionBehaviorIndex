@@ -276,16 +276,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.getElementById('start-button');
     startButton.addEventListener('click', () => {
         console.log("スタートボタンがクリックされました");
-        if (document.getElementById('consent-checkbox').checked) {
-            console.log("プライバシーポリシーに同意しました");
-            document.getElementById('intro').classList.add('hidden');
-            document.getElementById('progress-container').classList.remove('hidden');
-            document.getElementById('questions-container').classList.remove('hidden');
-            loadQuestions();
-            updateProgressBar();
-        } else {
+        // バリデーションチェック
+        const consent = document.getElementById('consent-checkbox').checked;
+        const age = document.getElementById('user-age').value;
+        const genderElements = document.getElementsByName('user-gender');
+        let gender = '';
+        genderElements.forEach(radio => {
+            if (radio.checked) {
+                gender = radio.value;
+            }
+        });
+
+        if (!consent) {
             alert("プライバシーポリシーに同意してください！");
+            console.log("プライバシーポリシーに同意していません");
+            return;
         }
+
+        if (!age) {
+            alert("年代を選択してください！");
+            console.log("年代が選択されていません");
+            return;
+        }
+
+        if (!gender) {
+            alert("性別を選択してください！");
+            console.log("性別が選択されていません");
+            return;
+        }
+
+        // ユーザー情報を保存
+        userAnswers['age'] = age;
+        userAnswers['gender'] = gender;
+
+        // イントロを隠して質問コンテナを表示
+        document.getElementById('intro').classList.add('hidden');
+        document.getElementById('progress-container').classList.remove('hidden');
+        document.getElementById('questions-container').classList.remove('hidden');
+        loadQuestions();
+        updateProgressBar();
     });
     updateButtonTexts();
 });
@@ -383,10 +412,6 @@ function setNavigationButtonEvents() {
     const prevButton = document.getElementById('prev-button');
     const submitButton = document.getElementById('submit-button');
 
-    // 既存のイベントリスナーをクリアするためにボタンを新しくするのは避ける
-    // 代わりに、removeEventListenerを使用するか、イベントハンドラを直接設定
-
-    // イベントリスナーを一度クリアする方法（匿名関数のため難しいため、直接設定）
     // 次へボタン
     nextButton.onclick = () => {
         console.log("次へボタンがクリックされました");
@@ -412,6 +437,7 @@ function setNavigationButtonEvents() {
         console.log("結果を見るボタンがクリックされました");
         if(saveAnswers()) {
             calculateResults();
+            sendDataToGoogleSheets(userAnswers); // データ送信
         }
     };
 }
@@ -435,6 +461,9 @@ function saveAnswers() {
             allAnswered = false;
         }
     });
+
+    // 既にイントロでユーザー情報を取得しているため、ここでは再取得しない
+    // ユーザー情報の再チェックは不要
 
     if (!allAnswered) {
         alert("全ての質問に回答してください！");
@@ -510,6 +539,7 @@ function displayResults(averageScores) {
     // 全体的な評価
     const highParams = Object.keys(averageScores).filter(param => averageScores[param] >= 4.0); // 4.0以上を高スコアとする
     let overallType = getOverallType(highParams.length); // 修正箇所
+    userAnswers['overallType'] = overallType; // データ送信用に追加
 
     // 全体的な評価を作成
     const overallDiv = document.createElement('div');
@@ -700,7 +730,7 @@ function displayResults(averageScores) {
             "コスパ指数": "あなたはコスパを意識する一方で、必要に応じて価格以外の価値を重視する柔軟なタイプです。賢い買い物を意識しつつ、デザインや品質など他の要素も大事にしています。",
             "未来設計指数": "あなたは未来設計を意識しつつも、日常の楽しみや必要性とのバランスを大切にしています。柔軟な判断ができるため、計画と実際の消費の両方を上手く組み合わせています。",
             "思いやりの消費指数": "あなたは他人への配慮を持ちながらも、自分のニーズとのバランスを大切にするタイプです。適度に他人を喜ばせつつ、無理のない範囲で消費行動を行っています。",
-            "自己成長チャレンジ指数": "あなたは自己成長を意識しつつも、日常の消費や楽しみとのバランスを大切にしています。状況に応じて適切に成長のための投資を行っています。",
+            "自己成長チャレンジ指数": "あなたは自己成長を意識しつつも、日常の楽しみや他の目的を優先する傾向があります。状況に応じて適切に成長のための投資を行っています。",
             "エコと社会貢献指数": "あなたは環境や社会貢献に対して適度な関心を持つタイプです。状況に応じてエコや社会的な要素を意識して選ぶことがあります。",
             "楽しみと癒し指数": "あなたは楽しみや癒しを重視しつつも、必要に応じて節約や計画性も意識するタイプです。バランスの取れた消費行動が特徴です。",
             "安心と備え指数": "あなたは安全性やリスク対策を適度に意識しつつ、日常の消費とのバランスを取るタイプです。必要に応じて備える柔軟性があります。",
@@ -750,6 +780,8 @@ function displayResults(averageScores) {
     function sendDataToGoogleSheets(data) {
         const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'; // ここにデプロイしたApps ScriptのURLを貼り付け
 
+        showLoading(); // ローディング表示
+
         fetch(scriptURL, {
             method: 'POST',
             mode: 'cors',
@@ -761,10 +793,21 @@ function displayResults(averageScores) {
         .then(response => response.json())
         .then(response => {
             console.log('Success:', response);
+            hideLoading(); // ローディング非表示
         })
         .catch(error => {
             console.error('Error:', error);
+            hideLoading(); // ローディング非表示
         });
+    }
+
+    // ローディングインジケーターの表示・非表示を制御
+    function showLoading() {
+        document.getElementById('loading').classList.remove('hidden');
+    }
+
+    function hideLoading() {
+        document.getElementById('loading').classList.add('hidden');
     }
 
     // ナビゲーションボタンのテキストを日本語に設定

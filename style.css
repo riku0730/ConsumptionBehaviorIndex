@@ -108,6 +108,36 @@ main {
     text-decoration: underline;
 }
 
+/* ユーザー情報入力フォームのスタイル */
+.user-info {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.user-info label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.user-info select {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.user-info input[type="radio"] {
+    margin-right: 5px;
+}
+
+.user-info label:first-child {
+    display: inline-block;
+    margin-right: 15px;
+}
+
 /* ナビゲーションボタン */
 .navigation-buttons {
     display: flex;
@@ -256,6 +286,11 @@ main {
     .result-decahedron {
         max-width: 300px;
     }
+
+    /* ユーザー情報入力フォームの調整 */
+    .user-info select {
+        width: 100%;
+    }
 }
 
 /* 追加のレスポンシブ調整 */
@@ -266,5 +301,10 @@ main {
 
     .result-decahedron .category-label {
         font-size: 5px; /* フォントサイズをさらに調整 */
+    }
+
+    .nav-button {
+        padding: 12px 25px;
+        font-size: 18px;
     }
 }
