@@ -437,7 +437,7 @@ function setNavigationButtonEvents() {
         console.log("結果を見るボタンがクリックされました");
         if(saveAnswers()) {
             calculateResults();
-            sendDataToGoogleSheets(userAnswers); // データ送信
+            // データ送信は calculateResults 内で行います
         }
     };
 }
@@ -461,9 +461,6 @@ function saveAnswers() {
             allAnswered = false;
         }
     });
-
-    // 既にイントロでユーザー情報を取得しているため、ここでは再取得しない
-    // ユーザー情報の再チェックは不要
 
     if (!allAnswered) {
         alert("全ての質問に回答してください！");
@@ -518,6 +515,42 @@ function calculateResults() {
 
     console.log("平均スコア:", averageScores);
     displayResults(averageScores);
+
+    // データ送信用にoverallTypeを追加
+    const highParams = Object.keys(averageScores).filter(param => parseFloat(averageScores[param]) >= 4.0); // 4.0以上を高スコアとする
+    let overallType = getOverallType(highParams.length); // 高スコアの個数に応じたタイプ
+
+    console.log("高スコアの個数:", highParams.length);
+    console.log("全体的な消費行動タイプ:", overallType);
+
+    // ユーザーの回答オブジェクトに平均スコアとoverallTypeを追加
+    for(let param in averageScores) {
+        userAnswers[param] = parseFloat(averageScores[param]);
+    }
+
+    userAnswers['overallType'] = overallType; // データ送信用に追加
+
+    // データ送信用のオブジェクトを構築
+    const dataToSend = {
+        age: userAnswers.age,
+        gender: userAnswers.gender,
+        answers: Array.from({length: 50}, (_, i) => userAnswers[`question-${i+1}`]),
+        "コスパ指数": parseFloat(userAnswers["コスパ指数"]),
+        "未来設計指数": parseFloat(userAnswers["未来設計指数"]),
+        "思いやりの消費指数": parseFloat(userAnswers["思いやりの消費指数"]),
+        "自己成長チャレンジ指数": parseFloat(userAnswers["自己成長チャレンジ指数"]),
+        "エコと社会貢献指数": parseFloat(userAnswers["エコと社会貢献指数"]),
+        "楽しみと癒し指数": parseFloat(userAnswers["楽しみと癒し指数"]),
+        "安心と備え指数": parseFloat(userAnswers["安心と備え指数"]),
+        "日常のアート指数": parseFloat(userAnswers["日常のアート指数"]),
+        "実用性へのこだわり指数": parseFloat(userAnswers["実用性へのこだわり指数"]),
+        "ブランド価値観指数": parseFloat(userAnswers["ブランド価値観指数"]),
+        overallType: overallType
+    };
+
+    console.log("データ送信用オブジェクト:", dataToSend);
+
+    sendDataToGoogleSheets(dataToSend); // データ送信
 }
 
 // 診断結果を表示する関数
@@ -758,7 +791,7 @@ function displayResults(averageScores) {
         return suggestions[param] || "";
     }
 
-    // 新しく追加する関数: 高スコアの個数に応じたタイプを返す
+    // 高スコアの個数に応じたタイプを返す関数
     function getOverallType(count) {
         const typeMapping = {
             0: "ニュートラル型",
@@ -776,39 +809,12 @@ function displayResults(averageScores) {
         return typeMapping[count] || "バランスの取れた消費者タイプ！"; // デフォルト値
     }
 
-    // ユーザーデータをGoogle Sheetsに送信する関数
-    function sendDataToGoogleSheets(data) {
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxpsK_P3LQVHTJ2sXBGZq4zlpQR22xE5K7_u6xUoKAiDVOlgbCzcaw1ODvhCuTUqrmAzQ/exec"; // 正しいURLに更新
+    // ユーザーデータをGoogle Sheetsに送信する関数（最新バージョン）
+    function sendDataToGoogleSheets(dataToSend) {
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzCC_bP0OEh4CsderQXebKBJ-YAHcx_ELqnnB33xeEUwSKxw6vk8woVZJ6ddS6LqEU3/exec"; // ユーザー提供のURLに変更
 
-        // userAnswers から answers 配列を構築
-        const answers = [];
-        for(let i = 1; i <= 50; i++) {
-            answers.push(data[`question-${i}`]);
-        }
-
-        // 各指数の平均スコアを構築
-        const indexAverages = {
-            "コスパ指数": parseFloat(data["コスパ指数"]),
-            "未来設計指数": parseFloat(data["未来設計指数"]),
-            "思いやりの消費指数": parseFloat(data["思いやりの消費指数"]),
-            "自己成長チャレンジ指数": parseFloat(data["自己成長チャレンジ指数"]),
-            "エコと社会貢献指数": parseFloat(data["エコと社会貢献指数"]),
-            "楽しみと癒し指数": parseFloat(data["楽しみと癒し指数"]),
-            "安心と備え指数": parseFloat(data["安心と備え指数"]),
-            "日常のアート指数": parseFloat(data["日常のアート指数"]),
-            "実用性へのこだわり指数": parseFloat(data["実用性へのこだわり指数"]),
-            "ブランド価値観指数": parseFloat(data["ブランド価値観指数"])
-        };
-
-        // 送信データの構築
-        const dataToSend = {
-            age: data.age,
-            gender: data.gender,
-            answers: answers,
-            ...indexAverages
-        };
-
-        showLoading(); // ローディング表示
+        // ローディング表示
+        showLoading();
 
         fetch(scriptURL, {
             method: 'POST',
@@ -823,8 +829,8 @@ function displayResults(averageScores) {
             hideLoading(); // ローディング非表示
             if(response.result === "success") {
                 alert('データの送信に成功しました！');
-                // 必要に応じてフォームのリセットや結果ページへの遷移など
-                resetForm(); // フォームのリセット
+                // フォームのリセット
+                resetForm();
             } else {
                 alert('データ送信に失敗しました: ' + response.message);
             }
